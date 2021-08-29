@@ -20,6 +20,10 @@ const UserSchema = Schema({
     required: [true, "El el password es Obligatorio"],
     trim: true,
   },
+  currency:{
+    type:String,
+    emun: ['EURO','DOLAR','PESOS']
+  },
   token:{
     type:String
   },

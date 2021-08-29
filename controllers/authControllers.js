@@ -2,11 +2,11 @@ const bcrypt = require("bcryptjs");
 const { generateJWT } = require("../helpers/generate-jwt");
 const User = require("../models/user");
 
-const authLogin = async (req, res) => {
-  const { username, password } = req.body;
+exports.authLogin = async (req, res) => {
+  const { userName, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ userName });
     //verificar el userName
     if (!user) {
       return res.status(400).json({
@@ -38,4 +38,3 @@ const authLogin = async (req, res) => {
   }
 };
 
-module.exports = { authLogin };

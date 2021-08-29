@@ -1,7 +1,7 @@
 const User = require("../models/user");
 var bcrypt = require("bcryptjs");
 
-const getUsers = async (req, res) => {
+exports.getUsers = async (req, res) => {
 
  const users = await User.find({});
  res.json({
@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
 
  
 };
-const updateUser = async (req, res) => {
+exports.updateUser = async (req, res) => {
   const { id } = req.params;
   const { _id, password, ...rest } = req.body;
   //validar contra la base de datos
@@ -26,7 +26,7 @@ const updateUser = async (req, res) => {
     user
   });
 };
-const createUsers = async (req, res) => {
+exports.createUsers = async (req, res) => {
   const { name, lastName,userName, password } = req.body;
   const user = new User({ name, lastName,userName, password});
   //encriptar contraseña del
@@ -39,17 +39,11 @@ const createUsers = async (req, res) => {
     user,
   });
 };
-const deleteUsers = async(req, res) => {
+exports.deleteUsers = async(req, res) => {
   const { id } = req.params;
   const user = await User.findByIdAndDelete(id);
   res.json({
     msg: "DELETE user API",
     user,
   });
-};
-module.exports = {
-  getUsers,
-  updateUser,
-  createUsers,
-  deleteUsers,
 };

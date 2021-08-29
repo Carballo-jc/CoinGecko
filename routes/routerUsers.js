@@ -8,12 +8,10 @@ const {
 } = require("../controllers/userControlles");
 const {
 
-  // validateId,
 } = require("../helpers/validate-db");
 
 const {
   validateInputs,
-  // validateJWT,
 } = require("../middlewares");
 
 const router = Router();
@@ -23,7 +21,6 @@ router.put(
   "/:id",
   [
     check("id", "No es un ID valido").isMongoId(),
-    // check("id").custom((id) => validateId(id)),
     validateInputs,
   ],
   updateUser
@@ -31,8 +28,8 @@ router.put(
 router.post(
   "/",
   [
-    check("UserName", "El UserName es obligatorio").not().isEmpty(),
-    check("Password", "El password debe ser mas de 8 caracteres").isLength({
+    check("userName", "El UserName es obligatorio").not().isEmpty(),
+    check("password", "El password debe ser mas de 8 caracteres").isLength({
       min: 8,
     }),
     validateInputs,
@@ -42,9 +39,7 @@ router.post(
 router.delete(
   "/:id",
   [
-    // validateJWT,
     check("id", "No es un ID valido").isMongoId(),
-    // check("id").custom((id) => validateId(id)),
     validateInputs,
   ],
   deleteUsers

@@ -4,7 +4,7 @@ const {MONGO_CONECT,DB_CONECT} = process.env
 const dbConnection = async() =>{
 
     try {
-     await   mongoose.connect(`${MONGO_CONECT}${DB_CONECT}`,{
+     await   mongoose.connect('mongodb://localhost/restapis',{
          useNewUrlParser:true,
          useUnifiedTopology:true,
          useCreateIndex:true,
