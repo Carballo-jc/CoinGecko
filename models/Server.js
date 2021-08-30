@@ -13,6 +13,7 @@ class Server {
         this.port = PORT;
         this.pathUsers = "/api/users";
         this.pathAuth = "/api/auth";
+        this.pathCoin = "/api/coins"
         // DB connection
         this.connectionDB();
         //Middlewares
@@ -35,6 +36,7 @@ class Server {
     router(){
         this.app.use(this.pathUsers,require('../routes/routerUsers'));
         this.app.use(this.pathAuth, require('../routes/routerAuth'));
+        this.app.use(this.pathCoin, require('../routes/routerCoins'));
     };
 
     listen(){

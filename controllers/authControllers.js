@@ -26,7 +26,7 @@ exports.authLogin = async (req, res) => {
     const token = await generateJWT(user.id);
 
     res.json({
-      msg: "POST login",
+      msg: "Token login",
       user,
       token,
     });

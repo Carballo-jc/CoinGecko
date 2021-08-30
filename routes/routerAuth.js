@@ -1,8 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { authLogin } = require("../controllers/authControllers");
-const { validateInputs } = require("../middlewares/validate-input");
-const validateJWT = require('../middlewares/validate-jwt');
+const authControllers= require("../controllers/authControllers");
+const { validateInputs } = require("../middlewares");
 
 const router = Router();
 
@@ -13,7 +12,7 @@ router.post(
     check("password", "La contraseña es obligatoria").not().isEmpty(),
     validateInputs,
   ],
-  authLogin
+  authControllers.authLogin
 );
 
 module.exports = router;

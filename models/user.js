@@ -20,20 +20,20 @@ const UserSchema = Schema({
     required: [true, "El el password es Obligatorio"],
     trim: true,
   },
-  currency:{
-    type:String,
-    emun: ['EURO','DOLAR','PESOS']
-  },
-  token:{
-    type:String
-  },
-  expireToken:{
-    type:Date
-  }
-  
- });
+  coins:[
+    {name:{
+      type:Schema.Types.ObjectId,
+      ref:'Coin'
+    }}
+  ]
+ },
+ {
+  timestamps: true,
+  versionKey: false,
+}
+ );
 UserSchema.methods.toJSON = function () {
-  const { __v, password, _id, ...user } = this.toObject();
+  const { password,createdAt,updatedAt, _id, ...user } = this.toObject();
   user.uid = _id;
   return user;
 };

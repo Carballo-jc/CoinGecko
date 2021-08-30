@@ -13,14 +13,14 @@ exports.getUsers = async (req, res) => {
 };
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { _id, password, ...rest } = req.body;
-  //validar contra la base de datos
-  if (password) {
-    //encriptar contraseña del
-    const salt = bcrypt.genSaltSync();
-    rest.password = bcrypt.hashSync(password, salt);
-  }
-  const user = await User.findByIdAndUpdate(id, rest);
+  // const { _id, password, ...rest } = req.body;
+  // //validar contra la base de datos
+  // if (password) {
+  //   //encriptar contraseña del
+  //   const salt = bcrypt.genSaltSync();
+  //   rest.password = bcrypt.hashSync(password, salt);
+  // }
+  const user = await User.findByIdAndUpdate(id);
   res.json({
     msg:'User Update',
     user

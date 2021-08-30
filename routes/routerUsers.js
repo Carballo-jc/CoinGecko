@@ -1,14 +1,6 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const {
-  getUsers,
-  updateUser,
-  createUsers,
-  deleteUsers,
-} = require("../controllers/userControlles");
-const {
-
-} = require("../helpers/validate-db");
+const userControlles = require("../controllers/userControlles");
 
 const {
   validateInputs,
@@ -16,14 +8,14 @@ const {
 
 const router = Router();
 
-router.get("/", getUsers);
+router.get("/", userControlles.getUsers);
 router.put(
   "/:id",
   [
     check("id", "No es un ID valido").isMongoId(),
     validateInputs,
   ],
-  updateUser
+  userControlles.updateUser
 );
 router.post(
   "/",
@@ -34,7 +26,7 @@ router.post(
     }),
     validateInputs,
   ],
-  createUsers
+  userControlles.createUsers
 );
 router.delete(
   "/:id",
@@ -42,7 +34,7 @@ router.delete(
     check("id", "No es un ID valido").isMongoId(),
     validateInputs,
   ],
-  deleteUsers
+  userControlles.deleteUsers
 );
 
 module.exports = router;
