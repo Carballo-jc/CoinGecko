@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 const userControlles = require("../controllers/userControlles");
-
+const {validateJWT} = require('../middlewares/validate-jwt');
 const {
   validateInputs,
 } = require("../middlewares");
@@ -12,6 +12,7 @@ router.get("/", userControlles.getUsers);
 router.put(
   "/:id",
   [
+    validateJWT,
     check("id", "No es un ID valido").isMongoId(),
     validateInputs,
   ],

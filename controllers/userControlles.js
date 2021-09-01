@@ -3,7 +3,10 @@ var bcrypt = require("bcryptjs");
 
 exports.getUsers = async (req, res) => {
 
- const users = await User.find({});
+ const users = await User.find().populate('coins').populate({
+   path:'coins.currency',
+   model:'Coin'
+ });
  res.json({
    msg:'GET Users',
    users
@@ -12,19 +15,27 @@ exports.getUsers = async (req, res) => {
  
 };
 exports.updateUser = async (req, res) => {
-  const { id } = req.params;
-  // const { _id, password, ...rest } = req.body;
-  // //validar contra la base de datos
-  // if (password) {
-  //   //encriptar contraseña del
-  //   const salt = bcrypt.genSaltSync();
-  //   rest.password = bcrypt.hashSync(password, salt);
-  // }
-  const user = await User.findByIdAndUpdate(id);
-  res.json({
-    msg:'User Update',
-    user
-  });
+  const { password} = req.body;
+  //validar contra la base de datos
+  if (password) {
+    //encriptar contraseña del
+    const salt = bcrypt.genSaltSync();
+    rest.password = bcrypt.hashSync(password, salt);
+  }
+  try {
+    let user = await User.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.json({ msg: "User Updated", user });
+  } catch (error) {
+    console.log(error);
+    res.status(301).json({msg:'Nose puedo actualizar el usuario'});
+    next()
+  }
 };
 exports.createUsers = async (req, res) => {
   const { name, lastName,userName, password } = req.body;

@@ -1,4 +1,6 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
 
 const UserSchema = Schema({
   name: {
@@ -21,8 +23,8 @@ const UserSchema = Schema({
     trim: true,
   },
   coins:[
-    {name:{
-      type:Schema.Types.ObjectId,
+    {currency:{
+      type: Schema.ObjectId,
       ref:'Coin'
     }}
   ]
@@ -38,4 +40,4 @@ UserSchema.methods.toJSON = function () {
   return user;
 };
 
-module.exports = model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
