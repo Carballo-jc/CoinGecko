@@ -29,6 +29,12 @@ router.post(
   ],
   userControlles.createUsers
 );
+router.post('/favorit/:id',[
+  // validateJWT,
+  // check("userName", "El UserName es obligatorio").not().isEmpty(),
+  // validateInputs
+],
+userControlles.newFavoritCoin)
 router.delete(
   "/:id",
   [

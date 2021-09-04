@@ -8,7 +8,7 @@ exports.getCoins = async (req, res) => {
   const data = dataCoins.data.map((coin) => {
     // const { name, current_price, image, symbol, last_updated } = coin;
     let currency = new Coins(coin);
-    //  currency.save()
+      // currency.save()
     return currency;
     
   });

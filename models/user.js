@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const UserSchema = Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: [true, "El nombre es Obligatorio"],
@@ -22,10 +22,14 @@ const UserSchema = Schema({
     required: [true, "El el password es Obligatorio"],
     trim: true,
   },
+  virtualCash:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Coins",
+  }],
   coins:[
     {currency:{
-      type: Schema.ObjectId,
-      ref:'Coin'
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Coins'
     }}
   ]
  },

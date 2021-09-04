@@ -25,4 +25,4 @@ const CoinSchema = Schema({
   versionKey:false
 });
 
-module.exports = model("Coin", CoinSchema);
+module.exports = model("Coins", CoinSchema);

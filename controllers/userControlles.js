@@ -1,12 +1,11 @@
 const User = require("../models/user");
 var bcrypt = require("bcryptjs");
+const Coins = require("../models/Coins");
 
 exports.getUsers = async (req, res) => {
 
- const users = await User.find().populate('coins').populate({
-   path:'coins.currency',
-   model:'Coin'
- });
+ const users = await User.find({}).populate('coins.currency',{name:1,symbol:1,image:1,current_price:1});
+
  res.json({
    msg:'GET Users',
    users
@@ -14,7 +13,7 @@ exports.getUsers = async (req, res) => {
 
  
 };
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res,next) => {
   const { password} = req.body;
   //validar contra la base de datos
   if (password) {
@@ -58,3 +57,26 @@ exports.deleteUsers = async(req, res) => {
     user,
   });
 };
+exports.newFavoritCoin = async(req,res,next) =>{
+  const id = req.params.id
+       const {userName,coin} = req.body;
+      //  console.log(coin);
+       const user = await User.findById(id);
+      //  console.log(user)
+      //  const currency = await Coins.findById(coin)
+      //  console.log(currency)
+       if(!user){
+           return res.status(400).json({msg:'Usuario no existe'})
+       }
+       let newCoin = new Coins(coin);
+       try {
+            await newCoin.save()
+           user.coins = user.coins.concat(newCoin);
+            await user.save()
+           res.json({msg:'se agrego correctamente',newCoin})
+       } catch (error) {
+           next(error)
+       }
+}   
+    
+

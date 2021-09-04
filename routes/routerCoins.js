@@ -7,8 +7,8 @@ const router = Router();
 
 router.get('/',
 [
-    validateJWT,
-    check('userName','El nombre es obligatorio').not().isEmpty(),
+    // validateJWT,
+    // check('userName','El nombre es obligatorio').not().isEmpty(),
 ],
 coinsControllers.getCoins);
 

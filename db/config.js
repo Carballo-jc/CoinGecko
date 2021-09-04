@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {MONGO_CONECT,DB_CONECT} = process.env
+const {MONGO_CONECT,DB_CONECT,CLOUSTER} = process.env
 
 exports.dbConnection = async() =>{
 
