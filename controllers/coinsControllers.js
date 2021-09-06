@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Coins = require("../models/Coins");
+const Coin = require("../models/coin");
 
 exports.getCoins = async (req, res) => {
   const dataCoins = await axios.get(
@@ -7,8 +7,8 @@ exports.getCoins = async (req, res) => {
   );
   const data = dataCoins.data.map((coin) => {
     // const { name, current_price, image, symbol, last_updated } = coin;
-    let currency = new Coins(coin);
-      // currency.save()
+    let currency = new Coin(coin);
+      currency.save()
     return currency;
     
   });

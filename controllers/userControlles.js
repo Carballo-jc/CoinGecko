@@ -1,6 +1,6 @@
 const User = require("../models/user");
 var bcrypt = require("bcryptjs");
-const Coins = require("../models/Coins");
+const Coin = require("../models/coin");
 
 exports.getUsers = async (req, res) => {
 
@@ -63,12 +63,12 @@ exports.newFavoritCoin = async(req,res,next) =>{
       //  console.log(coin);
        const user = await User.findById(id);
       //  console.log(user)
-      //  const currency = await Coins.findById(coin)
+      //  const currency = await Coin.findById(coin)
       //  console.log(currency)
        if(!user){
            return res.status(400).json({msg:'Usuario no existe'})
        }
-       let newCoin = new Coins(coin);
+       let newCoin = new Coin(coin);
        try {
             await newCoin.save()
            user.coins = user.coins.concat(newCoin);

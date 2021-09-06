@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
-const Schema = require('Schema');
+const Schema = mongoose.Schema;
 
-const FavouritesSchema = new Schema({
+const FavouriteSchema = new Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'users',
+		ref: 'User',
 	},
 	currency: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Coins',
+			ref: 'Coin',
 		},
 	],
 });
 
-module.exports = mongoose.model('favourites', FavouritesSchema);
+module.exports = mongoose.model('favourite', FavouriteSchema);

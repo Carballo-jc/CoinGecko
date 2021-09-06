@@ -13,7 +13,7 @@ class Server {
         this.port = PORT;
         this.pathUsers = "/api/users";
         this.pathAuth = "/api/auth";
-        this.pathCoin = "/api/coins"
+        this.pathCoin = "/api/coin"
         // DB connection
         this.connectionDB();
         //Middlewares

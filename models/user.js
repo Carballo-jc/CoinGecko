@@ -24,12 +24,12 @@ const UserSchema = new Schema({
   },
   virtualCash:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Coins",
+    ref: "Coin",
   }],
   coins:[
     {currency:{
       type: mongoose.Schema.Types.ObjectId,
-      ref:'Coins'
+      ref:'Coin'
     }}
   ]
  },
